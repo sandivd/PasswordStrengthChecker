@@ -68,15 +68,3 @@ Make sure you have Node.js and npm (or yarn) installed on your machine.
 
 The application should now be running on [http://localhost:3000](http://localhost:3000).
 
-
-## ✨ Features
-
--   **Real-time Strength Analysis**: Instantly evaluates the password as the user types.
--   **Visual Feedback**: A color-coded strength bar (Weak, Fair, Good, Strong) and percentage indicator.
--   **Dynamic Criteria Checklist**: Shows which requirements (e.g., length, uppercase, number) have been met.
--   **Light & Dark Mode**: A theme toggle allows users to switch between light and dark modes, with the preference saved in `localStorage`.
--   **Show/Hide Password**: A toggle to view or mask the password for better usability.
--   **Responsive Design**: Looks great on all screen sizes, from mobile to desktop.
--   **Security Tips**: Provides helpful tips for creating stronger passwords.
-
-
