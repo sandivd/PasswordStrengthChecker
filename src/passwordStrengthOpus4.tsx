@@ -26,31 +26,11 @@ export default function PasswordStrengthChecker() {
 
   const evaluatePassword = (pwd: string) => {
     const criteriaList: StrengthCriteria[] = [
-      {
-        regex: /.{8,}/,
-        text: 'At least 8 characters',
-        met: false
-      },
-      {
-        regex: /[A-Z]/,
-        text: 'Contains uppercase letter',
-        met: false
-      },
-      {
-        regex: /[a-z]/,
-        text: 'Contains lowercase letter',
-        met: false
-      },
-      {
-        regex: /[0-9]/,
-        text: 'Contains number',
-        met: false
-      },
-      {
-        regex: /[^A-Za-z0-9]/,
-        text: 'Contains special character',
-        met: false
-      }
+      { regex: /.{8,}/, text: 'At least 8 characters', met: false },
+      { regex: /[A-Z]/, text: 'Contains uppercase letter', met: false },
+      { regex: /[a-z]/, text: 'Contains lowercase letter', met: false },
+      { regex: /[0-9]/, text: 'Contains number', met: false },
+      { regex: /[^A-Za-z0-9]/, text: 'Contains special character', met: false }
     ];
 
     let score = 0;
@@ -61,21 +41,17 @@ export default function PasswordStrengthChecker() {
       }
     });
 
-    // Additional scoring for length
     if (pwd.length >= 12) score += 0.5;
     if (pwd.length >= 16) score += 0.5;
 
-    // Check for common patterns (deduct points)
     const commonPatterns = /^(password|123456|qwerty|abc123|letmein|admin|welcome|monkey|dragon)/i;
     if (commonPatterns.test(pwd)) score = Math.max(0, score - 2);
 
-    // Check for repeated characters
     const hasRepeats = /(.)\1{2,}/.test(pwd);
     if (hasRepeats) score = Math.max(0, score - 0.5);
 
     setCriteria(criteriaList);
 
-    // Calculate strength level
     let level: 'weak' | 'fair' | 'good' | 'strong' = 'weak';
     let color = 'bg-red-500';
     let percentage = 0;
@@ -107,31 +83,26 @@ export default function PasswordStrengthChecker() {
 
   const getStrengthText = () => {
     switch (strength.level) {
-      case 'strong':
-        return 'Excellent password!';
-      case 'good':
-        return 'Good password';
-      case 'fair':
-        return 'Could be stronger';
-      case 'weak':
-        return 'Too weak';
-      default:
-        return '';
+      case 'strong': return 'Excellent password!';
+      case 'good': return 'Good password';
+      case 'fair': return 'Could be stronger';
+      case 'weak': return 'Too weak';
+      default: return '';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4 transition-colors">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-lg p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Password Strength Checker</h1>
-            <p className="text-gray-600">Create a strong password to protect your account</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">Password Strength Checker</h1>
+            <p className="text-gray-600 dark:text-gray-400">Create a strong password to protect your account</p>
           </div>
 
           <div className="space-y-6">
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Enter Password
               </label>
               <div className="relative">
@@ -140,13 +111,13 @@ export default function PasswordStrengthChecker() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
                   placeholder="Type your password..."
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-gray-500 hover:text-gray-700 transition-colors"
+                  className="absolute right-3 top-3 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
                 >
                   {showPassword ? (
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -166,17 +137,17 @@ export default function PasswordStrengthChecker() {
               <>
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-700">Strength</span>
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Strength</span>
                     <span className={`text-sm font-semibold ${
-                      strength.level === 'strong' ? 'text-green-600' :
-                      strength.level === 'good' ? 'text-blue-600' :
-                      strength.level === 'fair' ? 'text-yellow-600' :
-                      'text-red-600'
+                      strength.level === 'strong' ? 'text-green-500' :
+                      strength.level === 'good' ? 'text-blue-500' :
+                      strength.level === 'fair' ? 'text-yellow-500' :
+                      'text-red-500'
                     }`}>
                       {getStrengthText()}
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-3 overflow-hidden">
                     <div
                       className={`h-full ${strength.color} transition-all duration-300 ease-out`}
                       style={{ width: `${strength.percentage}%` }}
@@ -185,22 +156,22 @@ export default function PasswordStrengthChecker() {
                 </div>
 
                 <div className="space-y-2">
-                  <p className="text-sm font-medium text-gray-700 mb-3">Password must contain:</p>
+                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Password must contain:</p>
                   {criteria.map((criterion, index) => (
                     <div key={index} className="flex items-center space-x-2">
                       <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                        criterion.met ? 'bg-green-100' : 'bg-gray-100'
+                        criterion.met ? 'bg-green-100 dark:bg-green-900' : 'bg-gray-100 dark:bg-gray-700'
                       }`}>
                         {criterion.met ? (
-                          <svg className="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3 h-3 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
                         ) : (
-                          <div className="w-2 h-2 bg-gray-400 rounded-full" />
+                          <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full" />
                         )}
                       </div>
                       <span className={`text-sm ${
-                        criterion.met ? 'text-green-700 font-medium' : 'text-gray-500'
+                        criterion.met ? 'text-green-700 dark:text-green-400 font-medium' : 'text-gray-500 dark:text-gray-400'
                       }`}>
                         {criterion.text}
                       </span>
@@ -209,8 +180,8 @@ export default function PasswordStrengthChecker() {
                 </div>
 
                 {strength.level !== 'strong' && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <p className="text-sm text-blue-800">
+                  <div className="bg-blue-50 dark:bg-blue-900/50 border border-blue-200 dark:border-blue-500/30 rounded-lg p-4">
+                    <p className="text-sm text-blue-800 dark:text-blue-300">
                       <span className="font-semibold">Tip:</span> Use a mix of characters and avoid common words or patterns for better security.
                     </p>
                   </div>
