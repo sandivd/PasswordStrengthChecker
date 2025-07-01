@@ -68,3 +68,22 @@ Make sure you have Node.js and npm (or yarn) installed on your machine.
 
 The application should now be running on [http://localhost:3000](http://localhost:3000).
 
+## 🧑‍💻 My Contributions
+
+I designed the password evaluation logic, iteratively prompted the AI assistant for feature implementation, and manually refined the UI for usability and accessibility. I customized the strength criteria, added real-time feedback, and ensured the component works seamlessly in both light and dark modes.
+
+## 🧩 Challenges Faced
+
+Balancing strict password security with user experience was a key challenge. I refined the criteria to avoid false negatives and implemented additional checks for common patterns and repeated characters. Ensuring the dynamic checklist and color-coded feedback updated smoothly as users typed required careful state management in React.
+
+## 📚 What I Learned
+
+Working with AI-generated code taught me how to rapidly prototype UI features and iterate efficiently using vibe coding techniques.
+
+## 🚧 Future Improvements
+
+If further developed, I would:
+- Integrate backend validation for enhanced security.
+- Add password strength analytics for user education.
+- Support additional languages and localization.
+- Improve accessibility for screen readers.
