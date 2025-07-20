@@ -2,7 +2,7 @@
 
 A modern, responsive password strength checker built with React, TypeScript, and Tailwind CSS. This application provides real-time feedback on password strength based on multiple criteria, helping users create more secure passwords. It also features a sleek dark mode, with the theme persisting across browser sessions.
 
-[View Live Demo]([https://sandivd.github.io/homeNest/](https://sandivd.github.io/PasswordStrengthChecker/)
+[View Live Demo](https://sandivd.github.io/PasswordStrengthChecker/)
 
 ## ✨ Features
 
